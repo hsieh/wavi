@@ -1,4 +1,6 @@
 
+LD = $(CC)
+
 SOURCE = Source/Wav.c
 
 OBJS = Wav.o
@@ -8,19 +10,11 @@ TARGET = Wavi
 JUNK = *.h.gch *.o a.out
 
 
-CFLAGS += --machine-64 -I. -c
+CFLAGS += -I. -c
 
-LDFLAGS += -melf_x86_64 \
-	   -dynamic-linker /lib64/ld-linux-x86-64.so.2 \
-	   -L/usr/lib/gcc/x86_64-linux-gnu/6/ \
-	   -L/usr/lib/gcc/x86_64-linux-gnu/ \
-	   -L/lib/ -L/usr/lib/ \
-	   -o $(TARGET)
+LDFLAGS += -o $(TARGET)
 
-LIBS += /usr/lib/x86_64-linux-gnu/crt1.o \
-	/usr/lib/x86_64-linux-gnu/crti.o \
-	/usr/lib/x86_64-linux-gnu/crtn.o \
-	-lpthread -lc
+LIBS += -lpthread
 
 
 all: $(TARGET)
