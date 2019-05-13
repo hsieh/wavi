@@ -16,8 +16,12 @@ LDFLAGS += -o $(TARGET)
 
 LIBS += -lpthread
 
+INSTALL_PATH=~/bin/`echo $(TARGET) | tr '[A-Z]' '[a-z]'`
 
 all: $(TARGET)
+
+install: all
+	install -m755 $(TARGET) $(INSTALL_PATH)
 
 $(TARGET): $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) $(LIBS)
@@ -30,8 +34,8 @@ $(SOURCE): $(HDRS)
 clean:
 	$(RM) $(JUNK)
 
-clean_all: clean
+cleanall: clean
 	$(RM) $(TARGET)
 
-.PHONY : all clean clean_all
+.PHONY : all clean cleanall
 
